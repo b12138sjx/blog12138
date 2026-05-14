@@ -1,0 +1,62 @@
+---
+title: "React 基础知识"
+date: "2026-05-09"
+tags: ["react", "前端", "javascript"]
+description: "React 核心概念整理：组件、Props、State、Hooks。"
+---
+
+# React 基础知识
+
+React 是一个用于构建用户界面的 JavaScript 库，本文整理核心概念。
+
+## 组件与 Props
+
+组件是 React 的基本构建块，Props 是父组件向子组件传递数据的方式：
+
+```tsx
+interface CardProps {
+  title: string
+  description: string
+}
+
+function Card({ title, description }: CardProps) {
+  return (
+    <div>
+      <h2>{title}</h2>
+      <p>{description}</p>
+    </div>
+  )
+}
+```
+
+## 常用 Hooks
+
+### useState
+
+```tsx
+const [value, setValue] = useState<string>('')
+```
+
+### useEffect
+
+```tsx
+useEffect(() => {
+  // 副作用逻辑，如数据请求
+  fetchData()
+}, [dependency]) // 依赖项变化时重新执行
+```
+
+### useMemo / useCallback
+
+用于性能优化，避免不必要的重新计算：
+
+```tsx
+const expensiveValue = useMemo(() => compute(data), [data])
+const stableCallback = useCallback(() => doSomething(id), [id])
+```
+
+## 延伸阅读
+
+React 是 [[nextjs-notes]] 的基础，掌握这些概念后可以更好地理解 Next.js 的工作方式。
+
+学习资料整理参见 [[learning-resources]]。

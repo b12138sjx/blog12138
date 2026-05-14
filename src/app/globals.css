@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+/* ── Obsidian 风格 CSS 变量 ─────────────────────────────────────────── */
+:root {
+  /* 亮色主题 */
+  --bg-primary:     #f5f5f0;
+  --bg-secondary:   #ebebeb;
+  --bg-tertiary:    #dedede;
+  --bg-hover:       #d8d8d8;
+  --border:         #d0d0cc;
+  --text-primary:   #1a1a1a;
+  --text-secondary: #444444;
+  --text-muted:     #888888;
+  --accent:         #705dcf;
+  --accent-muted:   #705dcf22;
+  --code-bg:        #e8e8e4;
+}
+
+.dark {
+  /* 深色主题（Obsidian 默认） */
+  --bg-primary:     #1e1e2e;
+  --bg-secondary:   #181825;
+  --bg-tertiary:    #313244;
+  --bg-hover:       #2a2a3d;
+  --border:         #313244;
+  --text-primary:   #cdd6f4;
+  --text-secondary: #a6adc8;
+  --text-muted:     #6c7086;
+  --accent:         #cba6f7;
+  --accent-muted:   #cba6f722;
+  --code-bg:        #181825;
+}
+
+/* ── 基础 ─────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 自定义滚动条 ──────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ── Prose / MDX 内容样式 ─────────────────────────────────────────── */
+.prose-obsidian {
+  color: var(--text-primary);
+  max-width: none;
+  line-height: 1.75;
+}
+
+.prose-obsidian h1,
+.prose-obsidian h2,
+.prose-obsidian h3,
+.prose-obsidian h4 {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-top: 1.75em;
+  margin-bottom: 0.5em;
+  scroll-margin-top: 80px;
+}
+
+.prose-obsidian h1 { font-size: 1.75rem; }
+.prose-obsidian h2 { font-size: 1.35rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+.prose-obsidian h3 { font-size: 1.15rem; }
+
+.prose-obsidian a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s;
+}
+.prose-obsidian a:hover { border-color: var(--accent); }
+
+.prose-obsidian p { margin: 1em 0; }
+
+.prose-obsidian ul,
+.prose-obsidian ol {
+  padding-left: 1.5em;
+  margin: 0.75em 0;
+}
+.prose-obsidian li { margin: 0.3em 0; }
+.prose-obsidian ul li { list-style-type: disc; }
+
+.prose-obsidian blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1em;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 1.25em 0;
+}
+
+.prose-obsidian code:not(pre code) {
+  background: var(--code-bg);
+  color: var(--accent);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.875em;
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+}
+
+.prose-obsidian pre {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1em 1.25em;
+  overflow-x: auto;
+  margin: 1.25em 0;
+  font-size: 0.875em;
+}
+
+.prose-obsidian table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25em 0;
+  font-size: 0.9em;
+}
+.prose-obsidian th {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.5em 0.75em;
+  border: 1px solid var(--border);
+}
+.prose-obsidian td {
+  padding: 0.5em 0.75em;
+  border: 1px solid var(--border);
+}
+.prose-obsidian tr:hover td { background: var(--bg-hover); }
+
+.prose-obsidian hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2em 0;
+}
+
+/* ── Wikilink 样式 ─────────────────────────────────────────────────── */
+.wikilink {
+  color: var(--accent) !important;
+  border-bottom: 1px solid rgba(203, 166, 247, 0.4) !important;
+}
+.wikilink:hover { border-color: var(--accent) !important; }
+
+/* 悬空链接（文章不存在）*/
+.wikilink-new {
+  color: var(--text-muted) !important;
+  border-bottom: 1px dashed var(--text-muted) !important;
+}
+
+/* ── rehype-pretty-code 代码块 ────────────────────────────────────── */
+[data-rehype-pretty-code-figure] pre {
+  background: #0d1117 !important;
+}
+[data-line] { padding: 0 1.25em; display: block; }
+[data-highlighted-line] { background: rgba(203, 166, 247, 0.08); }
+[data-rehype-pretty-code-title] {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 0.3em 1em;
+  font-size: 0.75em;
+  color: var(--text-muted);
+  font-family: monospace;
+}

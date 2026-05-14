@@ -1,0 +1,54 @@
+---
+title: "Next.js 学习笔记"
+date: "2026-05-10"
+tags: ["nextjs", "react", "前端"]
+description: "记录学习 Next.js App Router 的过程与心得。"
+---
+
+# Next.js 学习笔记
+
+Next.js 是目前最流行的 React 全栈框架，这篇笔记记录我学习 App Router 的过程。
+
+## App Router 核心概念
+
+### Server Components
+
+Next.js 13+ 默认所有组件都是 **Server Components**，它们在服务端渲染，不会增加客户端 bundle。
+
+```tsx
+// 这是一个 Server Component，可以直接 async/await
+async function PostList() {
+  const posts = await getPosts() // 直接在组件里取数据
+  return <ul>{posts.map(p => <li key={p.slug}>{p.title}</li>)}</ul>
+}
+```
+
+### Client Components
+
+需要交互（useState、事件监听）时，加上 `'use client'` 指令：
+
+```tsx
+'use client'
+import { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(c => c + 1)}>{count}</button>
+}
+```
+
+## 文件系统路由
+
+```
+app/
+├── page.tsx          → /
+├── about/page.tsx    → /about
+├── posts/
+│   ├── page.tsx      → /posts
+│   └── [slug]/
+│       └── page.tsx  → /posts/:slug
+```
+
+## 相关笔记
+
+这些概念建立在 [[react-basics]] 的基础上，同时这个博客本身就是用 Next.js 构建的，可以参考 [[welcome]] 了解更多。
